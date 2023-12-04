@@ -1,12 +1,9 @@
-# My .vim files
-## (Forked from LazyVim)
-
-My attempt at migrating to vim, wish me luck.
+My attempt at migrating to vim, wish me luck (Forked from LazyVim)
 
 ## Installation
 ```
 $ cd ~
-$ git clone ://github.com/samdavidge/.vim.git
+$ git clone https://github.com/samdavidge/.vim.git
 $ rm -rf ~/.config/nvim
 $ ln -s ~/.vim ~/.config/nvim
 $ nvim
