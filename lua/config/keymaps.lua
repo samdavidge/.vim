@@ -4,3 +4,7 @@
 
 -- ctrl + / [Jump to Neotree]
 vim.keymap.set("n", "<C-_>", "<Cmd>Neotree<Cr>")
+
+-- shift + Right [Next Buffer]
+vim.keymap.set("n", "<S-Right>", ":bnext<Cr>")
+vim.keymap.set("n", "<S-Left>", ":bprev<Cr>")
