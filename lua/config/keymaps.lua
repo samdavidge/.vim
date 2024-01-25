@@ -2,8 +2,8 @@
 -- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
 -- Add any additional keymaps here
 
--- alt + / [Jump to Neotree]
-vim.keymap.set("n", "<A-/>", "<Cmd>Neotree reveal<Cr>")
+-- Leader \  [Jump to Neotree]
+vim.keymap.set("n", "<Leader>\\", ":Neotree reveal<Cr>", { silent = true })
 
 -- alt + Right [Next Buffer]
 vim.keymap.set("n", "<A-Right>", ":bnext<Cr>", { silent = true })
