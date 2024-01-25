@@ -6,5 +6,5 @@
 vim.keymap.set("n", "<A-/>", "<Cmd>Neotree reveal<Cr>")
 
 -- alt + Right [Next Buffer]
-vim.keymap.set("n", "<A-Right>", ":bnext<Cr>")
-vim.keymap.set("n", "<A-Left>", ":bprev<Cr>")
+vim.keymap.set("n", "<A-Right>", ":bnext<Cr>", { silent = true })
+vim.keymap.set("n", "<A-Left>", ":bprev<Cr>", { silent = true })

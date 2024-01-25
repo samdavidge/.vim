@@ -11,4 +11,10 @@ $ nvim
 
 Be sure to run `:checkhealth` to identify any dependency issues (node, python, php, etc)
 
+## Keymaps
 
+| key             | Description                     |
+|---------------------------------------------------|
+| alt + /         | Jump to Neeotree                |
+| alt + Left      | Previous Buffer                 |
+| alt + Right     | Next Buffer                     |
