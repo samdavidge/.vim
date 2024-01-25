@@ -14,7 +14,9 @@ Be sure to run `:checkhealth` to identify any dependency issues (node, python, p
 ## Keymaps
 
 | key             | Description                     |
-|---------------------------------------------------|
+|-----------------|---------------------------------|
 | alt + /         | Jump to Neeotree                |
 | alt + Left      | Previous Buffer                 |
 | alt + Right     | Next Buffer                     |
+| space + /       | Live Grep                       |
+| space + space   | Files Search                    |
