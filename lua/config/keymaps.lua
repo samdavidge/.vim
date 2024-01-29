@@ -8,3 +8,6 @@ vim.keymap.set("n", "<Leader>\\", ":Neotree reveal<Cr>", { silent = true })
 -- alt + Right [Next Buffer]
 vim.keymap.set("n", "<A-Right>", ":bnext<Cr>", { silent = true })
 vim.keymap.set("n", "<A-Left>", ":bprev<Cr>", { silent = true })
+
+-- ctrl + c [Close current buffer]
+vim.keymap.set("n", "<C-c>", ":BufferClose<Cr>", { silent = true })

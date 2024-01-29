@@ -20,3 +20,4 @@ Be sure to run `:checkhealth` to identify any dependency issues (node, python, p
 | space + space   | Files Search                    |
 | alt + Left      | Previous Buffer                 |
 | alt + Right     | Next Buffer                     |
+| ctl + c         | Close Buffer                    |
