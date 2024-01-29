@@ -18,6 +18,7 @@ Be sure to run `:checkhealth` to identify any dependency issues (node, python, p
 | space + \       | Jump to Neeotree                |
 | space + /       | Live Grep                       |
 | space + space   | Files Search                    |
+| space + s       | Git Status                      |
 | alt + Left      | Previous Buffer                 |
 | alt + Right     | Next Buffer                     |
 | ctl + c         | Close Buffer                    |

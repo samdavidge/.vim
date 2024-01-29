@@ -1,7 +1,4 @@
 return {
-
-  { "akinsho/bufferline.nvim", enabled = false },
-
   {
     "romgrk/barbar.nvim",
     dependencies = {
