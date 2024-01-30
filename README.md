@@ -29,7 +29,7 @@ Be sure to run `:checkhealth` to identify any dependency issues (node, python, p
 
 #### Initial setup - xdebug
 
-I have only tested this with xdebug installed in docker. I won't cover the xdebug instalation here, but here is an example `xdebug.ini`:
+I have only tested this with xdebug installed in docker. I won't cover the xdebug installation here, but here is an example `xdebug.ini`:
 
 ```
 [XDebug]
