@@ -13,6 +13,8 @@ vim.keymap.set("n", "<A-Left>", ":bprev<Cr>", { silent = true })
 -- ctrl + c [Close current buffer]
 vim.keymap.set("n", "<C-c>", ":BufferClose<Cr>", { silent = true })
 
+vim.keymap.set("n", "<Leader>bo", ":BufferOrderByBufferNumber<Cr>", { silent = true })
+
 local harpoon = require("harpoon")
 
 harpoon:setup()
