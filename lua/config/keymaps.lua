@@ -14,6 +14,10 @@ vim.keymap.set("n", "<A-Left>", ":bprev<Cr>", { silent = true })
 vim.keymap.set("n", "<C-c>", ":BufferClose<Cr>", { silent = true })
 
 vim.keymap.set("n", "<Leader>bo", ":BufferOrderByBufferNumber<Cr>", { silent = true })
+vim.keymap.set("n", "<Leader>bc", "::BufferCloseAllButPinned<Cr>", { silent = true })
+
+--- Delete windows line endings
+vim.keymap.set("n", "<Leader>dm", ":%s/\\r//<Cr>", { silent = true })
 
 local harpoon = require("harpoon")
 
