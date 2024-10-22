@@ -3,6 +3,6 @@
 -- Add any additional autocmds here
 
 vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
-  pattern = { "*.controller", "*.model", "*.element", "*.layout", "*.view" },
+  pattern = { "*.controller", "*.model", "*.element", "*.layout", "*.view", "*.blade.php" },
   command = "set ft=php",
 })
