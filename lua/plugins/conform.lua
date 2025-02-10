@@ -9,6 +9,7 @@ return {
         fish = { "fish_indent" },
         sh = { "shfmt" },
         php = { "pint" },
+        vue = { "prettier" },
       },
       formatters = {
         prettier = {
