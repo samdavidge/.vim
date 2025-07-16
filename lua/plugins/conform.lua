@@ -10,6 +10,7 @@ return {
         sh = { "shfmt" },
         php = { "pint" },
         vue = { "prettier" },
+        md = { "prettier" },
       },
       formatters = {
         prettier = {
