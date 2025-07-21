@@ -22,7 +22,7 @@ Be sure to run `:checkhealth` to identify any dependency issues (node, python, p
 | alt + Left      | Previous Buffer                 |
 | alt + Right     | Next Buffer                     |
 | ctl + c         | Close Buffer                    |
-| space + ai      | Togle Code Companion            |
+| space + ai      | Toggle Code Companion            |
 
 ## DAP Notes 
 
