@@ -17,6 +17,11 @@ vim.keymap.set("n", "<C-c>", ":BufferClose<Cr>", { silent = true })
 vim.keymap.set("n", "<Leader>bo", ":BufferOrderByBufferNumber<Cr>", { silent = true })
 vim.keymap.set("n", "<Leader>bc", "::BufferCloseAllButPinned<Cr>", { silent = true })
 
+-- Add jumplist and quickfix to telescope
+local builtin = require("telescope.builtin")
+vim.keymap.set("n", "<leader>j", builtin.jumplist)
+vim.keymap.set("n", "<leader>q", builtin.quickfixhistory)
+
 -- codecompanion
 vim.keymap.set("n", "<Leader>ai", function()
   require("codecompanion").toggle()
