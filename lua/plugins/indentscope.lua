@@ -1,6 +1,6 @@
 return {
   {
-    "echasnovski/mini.indentscope",
+    "nvim-mini/mini.indentscope",
     opts = {
       draw = {
         delay = 25,
