@@ -20,7 +20,7 @@ vim.keymap.set("n", "<leader>q", builtin.quickfixhistory)
 
 -- pest
 vim.keymap.set("n", "<leader>tr", function()
-  require("pest").when_test(function(file)
+  require("tdd").when_test(function(file)
     -- The command runs your test, then opens a shell so the popup stays open
     local cwd = vim.fn.getcwd()
     local popup_cmd = string.format(

@@ -1,9 +1,9 @@
 return {
   lazy = false,
-  "aaronlord/pest.nvim",
+  "aaronlord/tdd.nvim",
   config = function()
     vim.keymap.set("n", "<leader>tj", function()
-      require("pest").jump()
+      require("tdd").jump()
     end, { desc = "Jump between tests and the sut" })
   end,
 }
