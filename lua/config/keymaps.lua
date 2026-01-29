@@ -32,11 +32,6 @@ vim.keymap.set("n", "<leader>tr", function()
   end)
 end, { desc = "Run a test" })
 
--- codecompanion
-vim.keymap.set("n", "<Leader>ai", function()
-  require("codecompanion").toggle()
-end, { silent = true })
-
 local harpoon = require("harpoon")
 
 harpoon:setup()
