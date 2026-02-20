@@ -10,6 +10,10 @@ return {
         sh = { "shfmt" },
         php = { "pint" },
         vue = { "prettier" },
+        javascript = { "prettier" },
+        typescript = { "prettier" },
+        tsx = { "prettier" },
+        jsx = { "prettier" },
         md = { "prettier" },
       },
       formatters = {
