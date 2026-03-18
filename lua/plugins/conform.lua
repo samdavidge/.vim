@@ -14,7 +14,9 @@ return {
         typescript = { "prettier" },
         tsx = { "prettier" },
         jsx = { "prettier" },
-        md = { "prettier" },
+        markdown = { "prettier" },
+        yml = { "prettier" },
+        yaml = { "prettier" },
       },
       formatters = {
         prettier = {
