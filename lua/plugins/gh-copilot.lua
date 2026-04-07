@@ -84,7 +84,7 @@ return {
         vim.fn.system(string.format("tmux send-keys -t %q Enter", target))
 
         -- Wait for copilot to initialize
-        vim.wait(3000)
+        vim.wait(5000)
 
         -- Send prompt as if typed
         send_to_tmux(target, prompt, "prompt")
@@ -93,7 +93,8 @@ return {
       end
 
       -- Create a new buffer for prompt input, with file context pre-filled
-      local function open_prompt_buffer()
+      local function open_prompt_buffer(opts)
+        opts = opts or {}
         -- Create a new scratch buffer
         local buf = vim.api.nvim_create_buf(false, true)
 
@@ -123,7 +124,15 @@ return {
         -- Build initial content
         local lines = { "", "", "###### Files in Context:", "" }
         if curfile then
-          table.insert(lines, "- @" .. curfile .. "  <- (this is the current file)")
+          local current_file_label = "(this is the current file)"
+          if opts.start_line and opts.end_line then
+            if opts.start_line == opts.end_line then
+              current_file_label = "(this is the current file, line " .. opts.start_line .. " specifically)"
+            else
+              current_file_label = "(this is the current file, lines " .. opts.start_line .. "-" .. opts.end_line .. " specifically)"
+            end
+          end
+          table.insert(lines, "- @" .. curfile .. "  <- " .. current_file_label)
         end
         for _, f in ipairs(others) do
           table.insert(lines, "- @" .. f)
@@ -162,6 +171,14 @@ return {
       end
 
       vim.keymap.set("n", "<leader>ai", open_prompt_buffer, { desc = "Open Copilot prompt buffer" })
+      vim.keymap.set("v", "<leader>ai", function()
+        local start_line = vim.fn.line("v")
+        local end_line = vim.fn.line(".")
+        if start_line > end_line then
+          start_line, end_line = end_line, start_line
+        end
+        open_prompt_buffer({ start_line = start_line, end_line = end_line })
+      end, { desc = "Open Copilot prompt buffer with selected lines" })
     end,
   },
 }
