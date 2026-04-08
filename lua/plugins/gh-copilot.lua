@@ -6,6 +6,63 @@ return {
       -- Target tmux pane/window. Change if needed (e.g. "1.2", ":.+" etc).
       local TMUX_TARGET = 3
 
+      local LOG_FILE = vim.fn.stdpath("data") .. "/copilot-prompts.log"
+
+      local function load_history()
+        local prompts = {}
+        local f = io.open(LOG_FILE, "r")
+        if not f then return prompts end
+        local current = {}
+        local current_ts = ""
+        for line in f:lines() do
+          if line:match("^=== %d%d%d%d%-%d%d%-%d%d %d%d:%d%d:%d%d ===$") then
+            if #current > 0 then
+              while #current > 0 and current[#current] == "" do
+                table.remove(current)
+              end
+              table.insert(prompts, { ts = current_ts, text = table.concat(current, "\n") })
+              current = {}
+            end
+            current_ts = line
+          else
+            table.insert(current, line)
+          end
+        end
+        if #current > 0 then
+          while #current > 0 and current[#current] == "" do
+            table.remove(current)
+          end
+          table.insert(prompts, { ts = current_ts, text = table.concat(current, "\n") })
+        end
+        f:close()
+        return prompts
+      end
+
+      local function log_prompt(prompt)
+        local f = io.open(LOG_FILE, "a")
+        if f then
+          f:write("=== " .. os.date("%Y-%m-%d %H:%M:%S") .. " ===\n")
+          f:write(prompt .. "\n\n")
+          f:close()
+        end
+        -- Keep only the last 10 prompts
+        local history = load_history()
+        if #history > 10 then
+          local trimmed = {}
+          for i = #history - 9, #history do
+            table.insert(trimmed, history[i])
+          end
+          local fw = io.open(LOG_FILE, "w")
+          if fw then
+            for _, p in ipairs(trimmed) do
+              fw:write(p.ts .. "\n")
+              fw:write(p.text .. "\n\n")
+            end
+            fw:close()
+          end
+        end
+      end
+
       -- Check tmux availability and that we are in a tmux session
       local function tmux_available()
         if vim.fn.executable("tmux") ~= 1 then
@@ -150,6 +207,39 @@ return {
         vim.api.nvim_set_option_value("modified", false, { buf = buf })
         vim.api.nvim_set_option_value("filetype", "markdown", { buf = buf })
 
+        -- History cycling: <C-p> older, <C-n> newer
+        local history = load_history()
+        local hist_idx = 0 -- 0 = draft, 1 = most recent, 2 = second most recent, ...
+        local draft_lines = vim.api.nvim_buf_get_lines(buf, 0, -1, false)
+
+        local function set_buf_content(text)
+          local new_lines = vim.split(text, "\n", { plain = true })
+          vim.api.nvim_buf_set_lines(buf, 0, -1, false, new_lines)
+          vim.api.nvim_set_option_value("modified", false, { buf = buf })
+          vim.cmd("normal! gg")
+        end
+
+        vim.keymap.set("n", "<C-p>", function()
+          if #history == 0 then return end
+          if hist_idx == 0 then
+            draft_lines = vim.api.nvim_buf_get_lines(buf, 0, -1, false)
+          end
+          hist_idx = math.min(hist_idx + 1, #history)
+          set_buf_content(history[#history - hist_idx + 1].text)
+        end, { buffer = buf, noremap = true, desc = "Previous prompt from history" })
+
+        vim.keymap.set("n", "<C-n>", function()
+          if hist_idx == 0 then return end
+          hist_idx = hist_idx - 1
+          if hist_idx == 0 then
+            vim.api.nvim_buf_set_lines(buf, 0, -1, false, draft_lines)
+            vim.api.nvim_set_option_value("modified", false, { buf = buf })
+            vim.cmd("normal! gg")
+          else
+            set_buf_content(history[#history - hist_idx + 1].text)
+          end
+        end, { buffer = buf, noremap = true, desc = "Next prompt from history" })
+
         -- Set up 'cc' keybinding to submit
         vim.keymap.set("n", "cc", function()
           local prompt = table.concat(vim.api.nvim_buf_get_lines(buf, 0, -1, false), "\n")
@@ -163,6 +253,7 @@ return {
             send_to_new_session(TMUX_TARGET, prompt)
           end
 
+          log_prompt(prompt)
           vim.cmd("bdelete!")
         end, { buffer = buf, noremap = true, desc = "Submit prompt to copilot" })
 
