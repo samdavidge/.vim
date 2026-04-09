@@ -9,18 +9,18 @@ return {
         pest = {
           command = function(file, test_name)
             if test_name then
-              return string.format('./vendor/bin/pest pest --stop-on-defect %s --filter "%s"', file, test_name)
+              return string.format('./vendor/bin/sail pest --stop-on-defect %s --filter "%s"', file, test_name)
             else
-              return string.format("./vendor/bin/pest pest --stop-on-defect %s", file)
+              return string.format("./vendor/bin/sail pest --stop-on-defect %s", file)
             end
           end,
         },
         vitest = {
           command = function(file, _, line_number)
             if line_number then
-              return string.format("./vendor/bin/pest npm run test:run -- %s:%s", file, line_number)
+              return string.format("./vendor/bin/sail npm run test:run -- %s:%s", file, line_number)
             else
-              return string.format("./vendor/bin/pest npm run test:run -- %s", file)
+              return string.format("./vendor/bin/sail npm run test:run -- %s", file)
             end
           end,
         },
