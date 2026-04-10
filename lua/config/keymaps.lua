@@ -15,6 +15,11 @@ vim.keymap.set("n", "<Leader>bc", "::BufferCloseAllButPinned<Cr>", { silent = tr
 
 -- Add jumplist and quickfix to telescope
 local builtin = require("telescope.builtin")
+vim.keymap.set("n", "<leader>j", builtin.jumplist)
+vim.keymap.set("n", "<leader>q", builtin.quickfixhistory)
+
+-- harpoon
+local harpoon = require("harpoon")
 
 harpoon:setup()
 
